@@ -1,7 +1,7 @@
 document.getElementById("content").onkeydown = function(event){
     
     var client = new HttpClient();
-    client.get('http://localhost:3000/send'+event.keyCode, function(response) {
+    client.get('http://localhost:3000/send?key='+event.keyCode, function(response) {
         alert(event.keyCode);
     });
 };
