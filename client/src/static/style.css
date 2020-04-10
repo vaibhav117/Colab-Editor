@@ -22,3 +22,21 @@ div:focus {
   padding-top: 10px;
   font-size: 24px;
 }
+
+textarea {
+  height: 500px;
+  width: 800px;
+}
+
+#textarea {
+  -moz-appearance: textfield-multiline;
+  -webkit-appearance: textarea;
+  border: 1px solid gray;
+  font: medium -moz-fixed;
+  font: -webkit-small-control;
+  height: 500px;
+  overflow: auto;
+  padding: 2px;
+  resize: both;
+  width: 800px;
+}

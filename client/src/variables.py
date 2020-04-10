@@ -1,16 +1,17 @@
-app = Flask(__name__)
+change_log = {
+  'commands' : [
+    {
+      'event' : "Add",
+      'element' : 'a',
+      'left_id' : 'aaaaaaaaaa',
+      'left_count' : 0,
+      'id' : 'aaaaaaaaaa',
+      'count' : 1
+    }
+  ]
+}
 
-data = {
-    'content':[
-      {
-        'element':'[',
-        'tombstone':False,
-        'start':True,
-        'id':'aaa',
-        'pos':0
-      }
-    ]
-  }
+change_log_user_tracker = {}
 
 used_user_id = set([])
 id_len = 10
