@@ -12,14 +12,14 @@ document.getElementById('textarea').focus();
     if(crdt_get_user_id() != 'temp'){
         sync_local_update_commands_with_server();
     }    
-    setTimeout( send_update_log_to_server, 10000 );
+    setTimeout( send_update_log_to_server, 500 );
 })();
 
 (function get_update_log_from_server() {
     if(crdt_get_user_id() != 'temp'){
         sync_remote_update_commands_with_server();
     }
-    setTimeout( get_update_log_from_server, 10000 );
+    setTimeout( get_update_log_from_server, 500 );
 })();
 
 document.addEventListener("keydown", process_key_press, false);
