@@ -1,5 +1,5 @@
 var user_id = "temp";
-var count = 0;
+var count = 1;
 var cursor_pos = 1;
 var content = {
     'content':[

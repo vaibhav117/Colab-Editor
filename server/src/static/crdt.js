@@ -20,7 +20,6 @@ function crdt_local_append_in_crdt(key){
 }
 
 function crdt_remote_append_in_crdt(char,left_id,left_count,id,count){
-    console.log('char:'+char+' left_id:'+left_id);
     if(id==crdt_get_user_id())
         return;
     var pos = 0;
@@ -34,13 +33,14 @@ function crdt_remote_append_in_crdt(char,left_id,left_count,id,count){
     while(pos<content['content'].length){
         var element = crdt_get_element(pos);
         if( element['id']==left_id && element['count']==left_count ){
+            console.log('match at '+pos);
             pos++;
-            while( (pos<content['content'].length) && (id.concat(count) < (crdt_get_element(pos)['id']).concat(crdt_get_element(pos)['count'])) ) {
+            while( (pos<content['content'].length) && crdt_compare_count_id(id,count,crdt_get_element(pos)['id'],crdt_get_element(pos)['count']) ) {
                 pos++;
             }
-            console.log('pos:'+pos+' element-');
-            console.log(element);
             crdt_insert_element_in_content(pos,new_element);
+            crdt_check_count_for_max(count);
+            console.log('insert '+char+' at '+pos);
             if(pos<=crdt_get_cursor_pos())
                 crdt_move_cursor_right();
             break;
@@ -52,8 +52,6 @@ function crdt_remote_append_in_crdt(char,left_id,left_count,id,count){
 }
 
 function crdt_backspace_key() {
-    //console.log(content);
-    //console.log('cursor_pos:'+crdt_get_cursor_pos());
     var element_pos = crdt_get_cursor_pos();
     var left_element=crdt_get_element(element_pos-1);
     if(element_pos>1){
@@ -80,6 +78,20 @@ function crdt_process_remote_command(command) {
     }
 }
 
+// true response means we have to shift right
+function crdt_compare_count_id(new_id,new_count,old_id,old_count){
+    if(new_count<old_count){
+        return true;
+    }
+    else if (new_count==old_count){
+        if(new_id<old_id)
+            return true;
+        else 
+            return false;
+    }
+    else 
+        return false;
+}
 
 
 // --------------------------------------------- CRDT UPDATE COMMAND FUNCTIONS
@@ -103,7 +115,6 @@ function crdt_insert_local_update_commands(key,new_element_id,new_element_count,
         'id'        : new_element_id,
         'count'     : new_element_count
     });
-    console.log(local_update_commands);
 }
 
 function crdt_get_element(pos) {
@@ -119,7 +130,6 @@ function crdt_remove_element_from_content(id,count){
 }
 
 function crdt_remove_local_update_commands(element){
-    //console.log(element);
     local_update_commands['commands'].push({
         'event' : "Remove",
         'id'    : element['id'],
@@ -191,4 +201,11 @@ function crdt_increment_count(){
 function crdt_get_count() {
     return count;
 }
+
+function crdt_check_count_for_max(val) {
+    if( crdt_get_count() <= val){
+        crdt_set_count(val+1);
+    }
+}
+
 

@@ -7,7 +7,6 @@ function get_id() {
 
 function get_change_log(user_id){
     var response = client.get('http://localhost:3000/get_change_log?user_id', function(response) {
-        console.log(JSON.parse(response));
         content = JSON.parse(response);
         render_text();
     });
@@ -24,7 +23,6 @@ function render_text() {
         }
     }
     document.getElementById("textarea").innerHTML = text;
-    console.log(text);
     return text;
 }
 
