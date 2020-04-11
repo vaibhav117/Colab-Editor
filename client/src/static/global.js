@@ -17,10 +17,6 @@ var local_update_commands = {
     'commands' : []
 };
 
-var remote_update_commands = {
-    'commands' : []
-};
-
 var text = ""
 var events = []
 
@@ -34,5 +30,18 @@ var HttpClient = function() {
 
         anHttpRequest.open( "GET", aUrl, true );            
         anHttpRequest.send( null );
+    }
+}
+
+var HttpClientPost = function() {
+    this.post = function(aUrl, data, aCallback) {
+        var anHttpRequest = new XMLHttpRequest();
+        anHttpRequest.onreadystatechange = function() { 
+            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+                aCallback(anHttpRequest.responseText);
+        }
+
+        anHttpRequest.open( "POST", aUrl, true );            
+        anHttpRequest.send( JSON.stringify(data) );
     }
 }

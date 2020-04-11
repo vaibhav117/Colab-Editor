@@ -39,4 +39,6 @@ textarea {
   padding: 2px;
   resize: both;
   width: 800px;
+  font-family: 'Gruppo';
+  font-size: 30px;
 }

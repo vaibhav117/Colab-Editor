@@ -5,6 +5,7 @@ import json
 
 import variables
 import crdt
+import json
 
 def register_new_user():
   letters = string.ascii_lowercase
@@ -16,3 +17,7 @@ def register_new_user():
   print (user_id,file=sys.stderr)
   return user_id
 
+def remote_change_log_process(data):
+  upate_commands = (json.loads(data))
+  for command in upate_commands['commands']:
+    crdt.crdt_append_to_change_log(command)
