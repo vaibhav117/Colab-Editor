@@ -1,8 +1,11 @@
 version: "3"
 services:
   credt_server:
-    build: .
-    command: "client.py"
+    build:
+      context: .
+      args:
+        - HOST_IP=${HOST_IP}
+    command: "server.py"
     ports:
       - "3000:3000"
     networks:

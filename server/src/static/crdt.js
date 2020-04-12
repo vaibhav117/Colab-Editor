@@ -12,7 +12,7 @@ function crdt_local_append_in_crdt(key){
         'id'        : new_element_id,
         'count'     : new_element_count
     };
-    
+    console.log(element);
     crdt_insert_element_in_content(new_element_pos,element);
     crdt_insert_local_update_commands(key,new_element_id,new_element_count,left_element);
     crdt_increment_cursor_pos();
@@ -33,7 +33,6 @@ function crdt_remote_append_in_crdt(char,left_id,left_count,id,count){
     while(pos<content['content'].length){
         var element = crdt_get_element(pos);
         if( element['id']==left_id && element['count']==left_count ){
-            console.log('match at '+pos);
             pos++;
             while( (pos<content['content'].length) && crdt_compare_count_id(id,count,crdt_get_element(pos)['id'],crdt_get_element(pos)['count']) ) {
                 pos++;
@@ -97,6 +96,26 @@ function crdt_compare_count_id(new_id,new_count,old_id,old_count){
 // --------------------------------------------- CRDT UPDATE COMMAND FUNCTIONS
 function crdt_clear_local_update_commands(){
     local_update_commands['commands'] = []
+}
+
+function crdt_get_local_update_pos(){
+    return local_update_pointer_pos;
+}
+
+function crdt_update_local_uupdate_pos(val){
+    local_update_pointer_pos = val;
+}
+
+function crdt_get_local_update_commands(){
+    var events = [];
+    iterator = crdt_get_local_update_pos();
+    while(iterator<(local_update_commands['commands'].length-1))
+    {
+        iterator++;
+        events.push(local_update_commands['commands'][iterator]);
+    }
+    crdt_update_local_uupdate_pos(iterator);
+    return events;
 }
 
 

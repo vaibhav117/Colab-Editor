@@ -19,5 +19,6 @@ def register_new_user():
 
 def remote_change_log_process(data):
   upate_commands = (json.loads(data))
+  print (upate_commands,file=sys.stderr)
   for command in upate_commands['commands']:
     crdt.crdt_append_to_change_log(command)

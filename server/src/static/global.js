@@ -1,6 +1,8 @@
 var user_id = "temp";
 var count = 1;
 var cursor_pos = 1;
+var local_update_pointer_pos = -1;
+var host_server_ip = "${HOST_IP}";
 var content = {
     'content':[
         {
@@ -18,7 +20,6 @@ var local_update_commands = {
 };
 
 var text = ""
-var events = []
 
 var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
