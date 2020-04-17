@@ -114,8 +114,7 @@ function crdt_get_local_update_commands(){
         iterator++;
         events.push(local_update_commands['commands'][iterator]);
     }
-    crdt_update_local_uupdate_pos(iterator);
-    return events;
+    return [events,iterator];
 }
 
 

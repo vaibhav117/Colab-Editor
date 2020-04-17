@@ -3,6 +3,7 @@ var count = 1;
 var cursor_pos = 1;
 var local_update_pointer_pos = -1;
 var host_server_ip = "${HOST_IP}";
+var cursor_state = false;
 var content = {
     'content':[
         {
