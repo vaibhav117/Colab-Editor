@@ -34,7 +34,7 @@ textarea {
   border: 1px solid gray;
   font: medium -moz-fixed;
   font: -webkit-small-control;
-  height: 500px;
+  height: 200px;
   overflow: auto;
   padding: 2px;
   resize: both;
