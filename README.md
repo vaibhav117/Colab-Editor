@@ -7,3 +7,4 @@
 
 
 # Demo
+![](crdt_demo.gif)
