@@ -1,3 +1,7 @@
+# What's this?
+Conflict Free Replication Data Types (CRDTs), are a type of data structures that can be updates and used in a distriubted fashion without having a need for extensive synchronization and consensus.
+This is P2P collab editor, much like a very basic version of Google docs. 
+
 # Setting it up!
 
 1. Clone the repo.
